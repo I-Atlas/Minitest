@@ -12,11 +12,13 @@ import fetch from "node-fetch";
  * 3. Сделать его быстрым (опять таки если есть время и желание и ещё есть, что ускорять)
  */
 
-const getResults = async (urlsArray: string[]) => {
+const fetchApi = async (url: string) => {
+  return await fetch(url).then((response) => response.json());
+};
+
+const getRequestResults = async (urlsArray: string[]) => {
   try {
-    const requests = urlsArray.map((url) =>
-      fetch(url).then((response) => response.json()),
-    );
+    const requests = urlsArray.map((url) => fetchApi(url));
     const results = await Promise.allSettled(requests);
     return results;
   } catch (error) {
@@ -29,7 +31,7 @@ const getResults = async (urlsArray: string[]) => {
  * @param additional дополнительные URL-ы для запроса
  */
 
-export const apiRequestLoop = async (additional?: string[]) => {
+export const createApiRequest = async (additional?: string[]) => {
   const urlsArray = [
     // "https://raw.githubusercontent.com/dmfilipenko/timezones.json/master/timezones.json",
     "https://raw.githubusercontent.com/benoitvallon/100-best-books/master/books.json",
@@ -37,10 +39,10 @@ export const apiRequestLoop = async (additional?: string[]) => {
   ];
 
   // Todo: прокинуть в функцию дженерик для того, чтобы нормально типизировать ответ
-  return getResults(urlsArray).then((results) => console.log(results));
+  return getRequestResults(urlsArray);
 };
 
 // Симуляция запроса с ошибкой
-apiRequestLoop([
-  "https://raw.githubusercontent.com/benoitvallon/0-best-books/master/books.json",
-]);
+createApiRequest([
+  "https://raw.githubusercontent.com/benoitvallon/100-worst-books/master/books.json",
+]).then((results) => console.log(results));
