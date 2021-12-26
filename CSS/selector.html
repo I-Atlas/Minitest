@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" class="html">
-<head>
-  <meta charset="UTF-8">
-  <title>Selector test</title>
-  <style>
-    * {
+  <head>
+    <meta charset="UTF-8" />
+    <title>Selector test</title>
+    <style>
+      * {
         box-sizing: border-box;
-    }
-    /* Тест на понимание фундаментальных основ вёрстки */
-    /* условие 1: не править HTML, не править JS, править только содержимое <style>. */
-    /* Задание 1: разукрасить элементы списка (color) в соответствии с текстом */
-    /* Задание 2: написать *отдельный* максимально *специфичный* селектор
+      }
+
+      #foo {
+        color: red;
+      }
+
+      .bar {
+        color: green;
+      }
+
+      li:last-child {
+        color: blue;
+        font-weight: bold;
+      }
+      /* Тест на понимание фундаментальных основ вёрстки */
+      /* условие 1: не править HTML, не править JS, править только содержимое <style>. */
+      /* Задание 1: разукрасить элементы списка (color) в соответствии с текстом */
+      /* Задание 2: написать *отдельный* максимально *специфичный* селектор
                   только для *последнего* li (без использования :not)
                   и сделать тест жирным */
-  </style>
-</head>
-<body id="body">
-<ul>
-  <li id="foo">red</li>
-  <li class="bar">green</li>
-  <li>blue</li>
-</ul>
-</body>
+    </style>
+  </head>
+  <body id="body">
+    <ul>
+      <li id="foo">red</li>
+      <li class="bar">green</li>
+      <li>blue</li>
+    </ul>
+  </body>
 </html>
